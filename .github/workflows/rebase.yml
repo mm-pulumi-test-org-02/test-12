@@ -12,6 +12,7 @@ jobs:
     # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issue_comment
     if: github.event.issue.pull_request && github.event.comment.body == '/rebase'
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
         with:
