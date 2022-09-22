@@ -21,7 +21,15 @@ jobs:
         run: echo '${{ toJSON(github) }}'
 
       - name: Merge checks
+        if: github.event_name == 'push'
         uses: moneymeets/action-merge-checks@feature/MD-6273-use-github-api-to-get-list-of-commits
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_head_sha: ${{ github.sha }}
+
+      - name: Merge checks (external contributions)
+        if: github.event_name == 'pull_request_target'
+        uses: moneymeets/action-merge-checks@feature/MD-6273-use-github-api-to-get-list-of-commits
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_head_sha: ${{ github.head.sha }}
