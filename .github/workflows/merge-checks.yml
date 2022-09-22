@@ -32,4 +32,4 @@ jobs:
         uses: moneymeets/action-merge-checks@feature/MD-6273-use-github-api-to-get-list-of-commits
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          github_head_sha: ${{ github.head.sha }}
+          github_head_sha: ${{ github.event.pull_request.base.head.sha }}
