@@ -19,10 +19,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: print env vars
+      - name: print github vars
         run: echo '${{ toJSON(github) }}'
 
       - name: Merge checks
-        uses: moneymeets/action-merge-checks@master
+        uses: moneymeets/action-merge-checks@feature/MD-6273-use-github-api-to-get-list-of-commits
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_head_sha: ${{ github.sha }}
