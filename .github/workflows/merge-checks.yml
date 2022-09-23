@@ -24,7 +24,7 @@ jobs:
             condition: ${{ github.event_name == 'pull_request_target' }}
             if_condition_true: ${{ github.event.pull_request.head.sha }}
             if_condition_false: ${{ github.sha }}
-
+      
       - name: Merge checks
         uses: moneymeets/action-merge-checks@feature/MD-6273-use-github-api-to-get-list-of-commits
         with:
