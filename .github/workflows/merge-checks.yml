@@ -17,16 +17,15 @@ jobs:
       contents: read
       statuses: write
     steps:
-      - name: Get head commit hash
-        id: get_head_hash
-        uses: moneymeets/moneymeets-composite-actions/select-conditionally@feature/add-select-conditionally-composite-action
+      - uses: actions/github-script@v6
+        id: get-head-hash
         with:
-            condition: ${{ github.event_name == 'pull_request_target' }}
-            if_condition_true: ${{ github.event.pull_request.head.sha }}
-            if_condition_false: ${{ github.sha }}
+          result-encoding: string
+          script: |
+            core.setOutput("value", context.eventName == "pull_request_target" ? context.payload.event.pull_request.head.sha : context.sha);
 
       - name: Merge checks
         uses: moneymeets/action-merge-checks@feature/MD-6273-use-github-api-to-get-list-of-commits
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          github_head_sha: ${{ steps.get_head_hash.outputs.value }}
+          head_sha: ${{ steps.get-head-hash.outputs.value }}
