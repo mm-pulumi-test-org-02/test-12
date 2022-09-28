@@ -22,7 +22,7 @@ jobs:
         with:
           result-encoding: string
           script: |
-            core.setOutput("value", context.eventName == "pull_request_target" ? context.payload.event.pull_request.head.sha : context.sha);
+            core.setOutput("value", context.eventName == "pull_request_target" ? context.payload.pull_request.head.sha : context.sha);
 
       - name: Merge checks
         uses: moneymeets/action-merge-checks@feature/MD-6273-use-github-api-to-get-list-of-commits
