@@ -25,7 +25,7 @@ jobs:
             core.setOutput("value", context.eventName == "pull_request_target" ? context.payload.pull_request.head.sha : context.sha);
 
       - name: Merge checks
-        uses: moneymeets/action-merge-checks@feature/MD-6273-use-github-api-to-get-list-of-commits
+        uses: moneymeets/action-merge-checks@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           head_sha: ${{ steps.get-head-hash.outputs.value }}
